@@ -1,0 +1,332 @@
+﻿USE [master]
+GO
+/****** Object:  Database [CRM_DB]    Script Date: 10/3/2022 12:25:19 AM ******/
+CREATE DATABASE [CRM_DB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'CRM_DB', FILENAME = N'd:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\CRM_DB.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'CRM_DB_log', FILENAME = N'd:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\CRM_DB_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [CRM_DB] SET COMPATIBILITY_LEVEL = 110
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [CRM_DB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [CRM_DB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [CRM_DB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [CRM_DB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [CRM_DB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [CRM_DB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [CRM_DB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [CRM_DB] SET AUTO_CREATE_STATISTICS ON 
+GO
+ALTER DATABASE [CRM_DB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [CRM_DB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [CRM_DB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [CRM_DB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [CRM_DB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [CRM_DB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [CRM_DB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [CRM_DB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [CRM_DB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [CRM_DB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [CRM_DB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [CRM_DB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [CRM_DB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [CRM_DB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [CRM_DB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [CRM_DB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [CRM_DB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [CRM_DB] SET  MULTI_USER 
+GO
+ALTER DATABASE [CRM_DB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [CRM_DB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [CRM_DB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [CRM_DB] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'CRM_DB', N'ON'
+GO
+USE [CRM_DB]
+GO
+/****** Object:  Table [dbo].[Tbl_LoginUserList]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_LoginUserList](
+	[Plant] [int] NOT NULL,
+	[Company] [nvarchar](5) NOT NULL,
+	[ID] [int] NOT NULL,
+	[FirstName] [nvarchar](25) NOT NULL,
+	[LastName] [nvarchar](25) NOT NULL,
+	[UserName] [nvarchar](20) NOT NULL,
+	[Password] [nvarchar](100) NOT NULL,
+	[Mail] [nvarchar](35) NOT NULL,
+	[Level] [int] NOT NULL,
+	[MacAddress] [nvarchar](12) NOT NULL,
+	[ExpiredDate] [nvarchar](20) NOT NULL,
+	[EndUser] [nvarchar](10) NOT NULL,
+	[License] [nvarchar](20) NOT NULL,
+	[ChangeDate] [nvarchar](20) NULL,
+	[ChangeTime] [nvarchar](20) NULL,
+	[Appver] [nvarchar](35) NULL,
+	[RecordDate] [nvarchar](35) NULL,
+	[ConfText] [nvarchar](35) NULL,
+ CONSTRAINT [PK_Tbl_User_Account_data] PRIMARY KEY CLUSTERED 
+(
+	[UserName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_LoginUserRights]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_LoginUserRights](
+	[ID] [int] NOT NULL,
+	[UserName] [nvarchar](50) NULL,
+	[FormName] [nvarchar](500) NULL,
+	[FormStatus] [nvarchar](500) NULL,
+	[EnterDate] [nvarchar](50) NULL,
+	[EnterTime] [nvarchar](50) NULL,
+	[EnterBy] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_MemberIDList]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_MemberIDList](
+	[IDNumber] [int] NOT NULL,
+	[MemberID] [nvarchar](500) NULL,
+	[MemberName] [nvarchar](500) NULL,
+	[EnterDate] [nvarchar](50) NULL,
+	[EnterTime] [nvarchar](50) NULL,
+	[EnterBy] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IDNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_MembersList]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_MembersList](
+	[ID] [int] NOT NULL,
+	[SystemID] [nvarchar](max) NULL,
+	[Batch] [nvarchar](max) NULL,
+	[Name] [nvarchar](max) NULL,
+	[Mobile] [nvarchar](max) NULL,
+	[Email] [nvarchar](max) NULL,
+	[NIC] [nvarchar](max) NULL,
+	[ManageBy] [nvarchar](max) NULL,
+	[Address] [nvarchar](max) NULL,
+	[EnterDate] [nvarchar](20) NULL,
+	[EnterTime] [nvarchar](20) NULL,
+	[EnterBy] [nvarchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_MembersListAllRecords]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_MembersListAllRecords](
+	[ID] [int] NOT NULL,
+	[SystemID] [nvarchar](max) NULL,
+	[Batch] [nvarchar](max) NULL,
+	[Name] [nvarchar](max) NULL,
+	[Mobile] [nvarchar](max) NULL,
+	[Email] [nvarchar](max) NULL,
+	[NIC] [nvarchar](max) NULL,
+	[ManageBy] [nvarchar](max) NULL,
+	[Address] [nvarchar](max) NULL,
+	[EnterDate] [nvarchar](20) NULL,
+	[EnterTime] [nvarchar](20) NULL,
+	[EnterBy] [nvarchar](200) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_PaymentRegistrationDetails]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_PaymentRegistrationDetails](
+	[ID] [int] NOT NULL,
+	[MemberID] [nvarchar](20) NULL,
+	[Name] [nvarchar](max) NULL,
+	[NIC] [nvarchar](15) NULL,
+	[Email] [nvarchar](50) NULL,
+	[MemberBatch] [nvarchar](15) NULL,
+	[ProductName] [nvarchar](500) NULL,
+	[ProductAmount] [decimal](18, 5) NULL,
+	[AmountUnit] [nvarchar](5) NULL,
+	[FullAmount] [decimal](18, 5) NULL,
+	[DownPayment] [decimal](18, 5) NULL,
+	[LeftPayment] [decimal](18, 5) NULL,
+	[PayedAmount] [decimal](18, 5) NULL,
+	[ResetDate] [int] NULL,
+	[Rental] [decimal](18, 5) NULL,
+	[Notification] [nvarchar](15) NULL,
+	[EnterDate] [nvarchar](15) NULL,
+	[EnterTime] [nvarchar](15) NULL,
+	[EnterBy] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_PaymentTransactions]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_PaymentTransactions](
+	[ID] [int] NOT NULL,
+	[SubID] [nvarchar](50) NULL,
+	[MemberID] [nvarchar](50) NULL,
+	[Name] [nvarchar](max) NULL,
+	[ProductName] [nvarchar](max) NULL,
+	[ProductAmount] [decimal](18, 5) NULL,
+	[AmountUnit] [nvarchar](10) NULL,
+	[DownPayment] [decimal](18, 5) NULL,
+	[OutstandingPayment] [decimal](18, 5) NULL,
+	[DurationCount] [int] NULL,
+	[CurrentDuration] [int] NULL,
+	[Rental] [decimal](18, 5) NULL,
+	[PendingPayment] [decimal](18, 5) NULL,
+	[DueDate] [nvarchar](20) NULL,
+	[NotificationDate] [nvarchar](20) NULL,
+	[NotiflyStatus] [int] NULL,
+	[EnterDate] [nvarchar](20) NULL,
+	[EnterTime] [nvarchar](20) NULL,
+	[EnterBy] [nvarchar](20) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_PaymentTransactionslist]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_PaymentTransactionslist](
+	[ID] [int] NOT NULL,
+	[SubID] [nvarchar](50) NULL,
+	[MemberID] [nvarchar](50) NULL,
+	[Name] [nvarchar](50) NULL,
+	[ProductName] [nvarchar](max) NULL,
+	[ProductAmount] [decimal](18, 5) NULL,
+	[AmountUnit] [nvarchar](5) NULL,
+	[CurrentDuration] [int] NULL,
+	[Rental] [decimal](18, 5) NULL,
+	[PayedAmount] [decimal](18, 5) NULL,
+	[TransactionID] [nvarchar](50) NULL,
+	[DurationLeftAmount] [decimal](18, 5) NULL,
+	[PaymentType] [nvarchar](50) NULL,
+	[Remarks] [nvarchar](max) NULL,
+	[EnterDate] [nvarchar](50) NULL,
+	[EnterTime] [nvarchar](50) NULL,
+	[EnterBy] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_ProductNameList]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_ProductNameList](
+	[ID] [int] NOT NULL,
+	[MemberID] [nvarchar](max) NULL,
+	[ProductName] [nvarchar](max) NULL,
+	[Amount] [decimal](18, 5) NULL,
+	[Unit] [nvarchar](50) NULL,
+	[EnterDate] [nvarchar](15) NULL,
+	[EnterTime] [nvarchar](15) NULL,
+	[EnterBy] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tbl_SalesRepslist]    Script Date: 10/3/2022 12:25:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tbl_SalesRepslist](
+	[ID] [int] NOT NULL,
+	[Name] [nvarchar](500) NULL,
+	[Description] [nvarchar](500) NULL,
+	[Count] [nvarchar](500) NULL,
+	[Mobile] [nvarchar](15) NULL,
+	[Email] [nvarchar](100) NULL,
+	[EnterDate] [nvarchar](20) NULL,
+	[EnterTime] [nvarchar](20) NULL,
+	[EnterBy] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+USE [master]
+GO
+ALTER DATABASE [CRM_DB] SET  READ_WRITE 
+GO
